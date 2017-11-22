@@ -1,6 +1,10 @@
 {
   "name": "nearby-client",
   "description": "Spontaneous, ephemeral conversation channels, based on user location",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gsoldevila/nearby-client.git"
+  },
   "version": "0.1.0",
   "author": "Gerard Soldevila",
   "homepage": "http://ionicframework.com/",
