@@ -1,5 +1,5 @@
 ## Nearby client
-Nearby allows creating spontaneous, ephemeral conversation channels, based on user location. The `nearby client` component holds the client-side logic, and works in conjunction with [nearby server](https://github.com/ionic-team/ionic2-app-base).
+Nearby allows creating spontaneous, ephemeral conversation channels, based on user location. The `nearby client` component holds the client-side logic, and works in conjunction with [nearby server](https://github.com/gsoldevila/nearby-server).
 
 ### Features
 - Conversation channels are geolocalized and open (no access control).
@@ -15,7 +15,7 @@ Nearby allows creating spontaneous, ephemeral conversation channels, based on us
 
 
 ### Installation
-In order to run *Nearby* please install the [nearby server](https://github.com/ionic-team/ionic2-app-base) first. Then, clone this repository and run:
+In order to run *Nearby* please install the [nearby server](https://github.com/gsoldevila/nearby-server) first. Then, clone this repository and run:
 ```bash
 $ sudo npm install -g ionic cordova
 $ npm install
