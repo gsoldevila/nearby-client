@@ -14,17 +14,6 @@ $app-direction: ltr;
 
 @import "ionic.globals";
 
-
-// Shared Variables
-// --------------------------------------------------
-// To customize the look and feel of this app, you can override
-// the Sass variables found in Ionic's source scss files.
-// To view all the possible Ionic variables, see:
-// http://ionicframework.com/docs/theming/overriding-ionic-variables/
-
-
-
-
 // Named Color Variables
 // --------------------------------------------------
 // Named colors makes it easy to reuse colors on various components.
@@ -34,19 +23,35 @@ $app-direction: ltr;
 // The "primary" color is the only required color in the map.
 
 $colors: (
-  primary:    #488aff,
-  secondary:  #32db64,
-  danger:     #f53d3d,
-  light:      #f4f4f4,
-  dark:       #222
+  primary:    #FBB120,
+  secondary:  #FFC24B,
+  danger:     #D28C04,
+  light:      #FFD074,
+  //dark:       #A56D00,
+  dark:       #139893,
+  white:      #FFFFFF,
+  turquoise:  #139893,
+  purple:     #4528AD
 );
 
+// Shared Variables
+// --------------------------------------------------
+// To customize the look and feel of this app, you can override
+// the Sass variables found in Ionic's source scss files.
+// To view all the possible Ionic variables, see:
+// http://ionicframework.com/docs/theming/overriding-ionic-variables/
+
+$toolbar-background: #FBB120;
+$refresher-border-color: 'transparent';
+$refresher-icon-color: color($colors, turquoise);
+$refresher-text-color: color($colors, turquoise);
+
+$searchbar-md-input-clear-icon-color: color($colors, turquoise);
+$searchbar-md-input-search-icon-color: color($colors, turquoise);
 
 // App iOS Variables
 // --------------------------------------------------
 // iOS only Sass variables can go here
-
-
 
 
 // App Material Design Variables
@@ -54,13 +59,14 @@ $colors: (
 // Material Design only Sass variables can go here
 
 
-
-
 // App Windows Variables
 // --------------------------------------------------
 // Windows only Sass variables can go here
 
 
+// App Windows Variables
+// --------------------------------------------------
+// Windows only Sass variables can go here
 
 
 // App Theme

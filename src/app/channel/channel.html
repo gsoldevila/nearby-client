@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle (click)="goBack()">
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>#{{ channel?.name }}</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="channelOptions($event)">
+        <ion-icon name="more"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list no-lines>
+    <ion-item *ngFor="let message of channel?.messages; let i = index">
+      <p *ngIf="message.author?.id <= 0; else userMessage" class="system">
+        {{ message.content }} ({{ message.timestamp | date:'shortTime' }})
+      </p>
+      <ng-template #userMessage>
+        <ion-badge item-start [color]="message.author?.id === myself?.id ? 'turquoise' : 'primary'">
+          <b>{{ message.author.alias }}{{ message.author?.id === myself?.id ? ' (you)' : '' }}</b>
+          <i>{{ message.timestamp | date:'shortTime' }}</i>
+        </ion-badge>
+        <span class="messageContent" [innerHTML]="message.content | linky"></span>
+      </ng-template>
+    </ion-item>
+  </ion-list>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar color="white">
+    <ion-textarea #userMessage placeholder="Say something" (keyup)="$event.keyCode == 13 && !$event.shiftKey && sendMessage(userMessage)">
+    </ion-textarea>
+    <ion-buttons end>
+      <button ion-button icon-only color="turquoise" (click)="sendMessage(userMessage)"
+        (mousedown)="$event.preventDefault()">
+        <ion-icon name="send"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

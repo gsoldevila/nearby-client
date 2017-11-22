@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Profile</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <input type="hidden" class="form-control" formControlName="id">
+    <ion-list>
+      <ion-item>
+        <ion-label floating>Alias (required)</ion-label>
+        <ion-input type="text" class="form-control" formControlName="alias" required
+          autofocus>
+        </ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>First name (optional)</ion-label>
+        <ion-input type="text" class="form-control" formControlName="firstName"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Last Name (optional)</ion-label>
+        <ion-input type="text" class="form-control" formControlName="lastName"></ion-input>
+      </ion-item>
+    </ion-list>
+
+    <div padding>
+      <button [disabled]="!userForm.valid || !userForm.dirty" type="submit" ion-button
+        block>
+        <ion-spinner *ngIf="saving "></ion-spinner>
+        <span *ngIf="!saving ">{{ exists ? 'Update' : 'Save' }}</span>
+      </button>
+    </div>
+  </form>
+</ion-content>

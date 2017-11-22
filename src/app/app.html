@@ -1,18 +1,27 @@
 <ion-menu [content]="content">
   <ion-header>
     <ion-toolbar>
-      <ion-title>Menu</ion-title>
+      <ion-title>My channels</ion-title>
+      <ion-buttons end>
+        <button ion-button icon-only menuClose (click)="navigateProfile()">
+          <ion-icon name="person"></ion-icon>
+        </button>
+      </ion-buttons>
     </ion-toolbar>
   </ion-header>
 
   <ion-content>
-    <ion-list>
-      <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
-        {{p.title}}
+    <ion-list no-lines>
+      <button *ngFor="let channel of openChannels" menuClose ion-item (click)="gotoChannel(channel)">
+        <ion-badge *ngIf="channel.unread; else noUnread" color="purple">{{channel.unread}}</ion-badge>
+        <ng-template #noUnread>
+          <ion-icon name="people" item-start></ion-icon>
+        </ng-template>
+        {{channel.name}}
+        <ion-icon name="close" item-end (click)="leaveChannel(channel) && event.stopPropagation()"></ion-icon>
       </button>
     </ion-list>
   </ion-content>
-
 </ion-menu>
 
 <!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->

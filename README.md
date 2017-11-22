@@ -1,26 +1,51 @@
-This is a starter template for [Ionic](http://ionicframework.com/docs/) projects.
+## Nearby client
+Nearby allows creating spontaneous, ephemeral conversation channels, based on user location. The `nearby client` component holds the client-side logic, and works in conjunction with [nearby server](https://github.com/ionic-team/ionic2-app-base).
 
-## How to use this template
+### Features
+- Conversation channels are geolocalized and open (no access control).
+- **Thus, the application allows searching for conversation channels *nearby*.**
+- Conversation channels are ephemeral, i.e. when the last user leaves a channel, the channel disappears.
+- When disconnecting from the server (e.g. client application stops running), users will automatically leave their open conversations.
 
-*This template does not work on its own*. The shared files for each starter are found in the [ionic2-app-base repo](https://github.com/ionic-team/ionic2-app-base).
+### Technologies
+- The UI is currently based on [Ionic 4.x](https://ionicframework.com/) and [Angular 5.x](https://angular.io/).
+- [Socket.io](https://socket.io/) for the client - server communication.
+- Angular Redux store, aka [NgRxStore](https://github.com/ngrx/store), to manage the UI state.
+- 3rd party components such as [angular-linky](https://github.com/dzonatan/angular-linky) or [angular2-moment](https://github.com/urish/angular2-moment).
 
-To use this template, either create a new ionic project using the ionic node.js utility, or copy the files from this repository into the [Starter App Base](https://github.com/ionic-team/ionic2-app-base).
 
-### With the Ionic CLI:
-
-Take the name after `ionic2-starter-`, and that is the name of the template to be used when using the `ionic start` command below:
-
+### Installation
+In order to run *Nearby* please install the [nearby server](https://github.com/ionic-team/ionic2-app-base) first. Then, clone this repository and run:
 ```bash
 $ sudo npm install -g ionic cordova
-$ ionic start mySideMenu sidemenu
+$ npm install
+$ ionic serve
 ```
 
-Then, to run it, cd into `mySideMenu` and run:
-
+### Useful commands
+To launch Karma-Jasmine tests, please run:
 ```bash
-$ ionic cordova platform add ios
-$ ionic cordova run ios
+$ npm test
 ```
 
-Substitute ios for android if not on a Mac.
+Also, you can create a production build (minified, uglifyed, aot, ...) by running:
+```bash
+$ ionic build --prod --release
+```
+Upon successful build, the generated files will be available on the `www` folder.
 
+
+### Roadmap
+- Implement push notifications.
+- Improve conversation window layout on iOS - safari.
+- Add splash screen.
+- Add *unread* badges on the main screen.
+- Colorize conversation nicknames (IRC style).
+- Implement channel information, add user count.
+- Improve Unit test coverage.
+- Add e2e protractor tests.
+- Hide system notifications from *unread* count.
+- Notifications for newly created nearby channels.
+- Add Android + IOS platforms in Cordova + build native apps.
+- Enrich chat capabilities: smileys, images, etc.
+- Re-open previously open conversations upon user re-connection.

@@ -1,0 +1,68 @@
+<ion-header>
+  <ion-navbar [hidden]="showSearch">
+    <button ion-button menuToggle>
+      <ion-badge *ngIf="(channelState | async)?.unread; else noUnread" color="purple">{{(channelState | async)?.unread}}</ion-badge>
+      <ng-template #noUnread>
+        <ion-icon name="menu"></ion-icon>
+      </ng-template>
+    </button>
+    <ion-title>Nearby</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="doShowSearch($event)">
+        <ion-icon name="search"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+  <ion-toolbar [hidden]="!showSearch">
+    <ion-buttons left>
+      <button ion-button icon-only (click)="hideSearch()">
+        <ion-icon big name="arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-searchbar #searchBar (ionInput)="updateSearch($event)" debounce="1000" placeholder="Search nearby" (ionClear)="clearSearch()" (keyup)="$event.keyCode == 13 && hideSearch()"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content padding>
+  <ion-refresher (ionRefresh)="doSearch($event)">
+    <ion-refresher-content pullingText="Find channels nearby">
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <ion-chip color="turquoise" (click)="doShowRange()">
+    <ion-icon name="pin" color="turquoise"></ion-icon>
+    <ion-label>{{rangeLabels[filterRange]}}</ion-label>
+    <button ion-button clear (click)="updateRange(-1, $event)" *ngIf="filterRange >= 0" color="white">
+      <ion-icon name="close-circle" small></ion-icon>
+    </button>
+  </ion-chip>
+  <ion-chip color="turquoise" (click)="doShowSearch()" *ngIf="filterText">
+    <ion-icon name="search" color="turquoise"></ion-icon>
+    <ion-label>{{filterText}}</ion-label>
+    <button ion-button clear (click)="clearSearch()" color="white">
+      <ion-icon name="close-circle" small></ion-icon>
+    </button>
+  </ion-chip>
+
+  <ion-list no-lines>
+
+    <button ion-item icon-start *ngFor="let channel of (homeState | async)?.nearbyChannels" (click)="openChannel(channel)">
+      <ion-icon name="people" [color]="channel.online ? 'turquoise' : 'black'" item-start>
+      </ion-icon>
+      {{ channel.name }}
+      <ng-template *ngIf="channel.position">
+      <ion-note *ngIf="channel.position.distance >= 1000">{{ +channel.position.distance/1000 | number:'1.0-0' }} km from you</ion-note>
+      <ion-note *ngIf="channel.position.distance < 1000">{{ channel.position.distance }} m from you</ion-note>
+      </ng-template>
+      <p>Created {{channel.timestamp | amTimeAgo}} by {{channel.creator && channel.creator.alias ? channel.creator.alias : 'someone'}}</p>
+      <p *ngIf="channel.messages.length; else noMessages">Last message: {{ channel.messages[channel.messages.length - 1].timestamp | amTimeAgo }}</p>
+      <ng-template #noMessages>
+        <p>No recent messages</p>
+      </ng-template>
+    </button>
+  </ion-list>
+  <ion-fab bottom right>
+    <button ion-fab color="turquoise" (click)="doCreateChannel()"><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
+</ion-content>
