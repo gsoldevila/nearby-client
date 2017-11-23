@@ -9,9 +9,11 @@ import { EffectsModule } from '@ngrx/effects';
 import { IonicStorageModule } from '@ionic/storage';
 // TODO ngrx-store-ionic-storage does not seem to be working, it does not hydrate the store state at all
 //import { StorageSyncEffects } from 'ngrx-store-ionic-storage';
-import { SocketIoModule, SocketIoConfig } from 'ng-socket-io';
+import { SocketIoModule } from 'ng-socket-io';
 import { LinkyModule } from 'angular-linky';
 import { MomentModule } from 'angular2-moment';
+
+import { PRODUCTION, SOCKET_IO_URL } from '@environment';
 
 import { MyApp } from './app.component';
 import { WhitePage } from './home/white';
@@ -28,21 +30,15 @@ import { HomeEffects } from './home/store/home.effects';
 import { ProfileEffects } from './profile/store/profile.effects';
 import { ChannelEffects } from './channel/store/channel.effects';
 import { reducers } from './store/app.reducers';
+
 // TODO ngrx-store-ionic-storage does not seem to be working, it does not hydrate the store state at all
 import { logMetaReducer/*, storageMetaReducer*/ } from './store/meta.reducers';
 
 
 const metaReducers = [];
-
-if (window.location.host.includes('localhost')) {
-  metaReducers.push(logMetaReducer);
-} else {
-  // TODO ngrx-store-ionic-storage does not seem to be working, it does not hydrate the store state at all
-  //metaReducers.push(storageMetaReducer);
-}
-
-export const SOCKET_IO_URL = window.location.hostname.includes('localhost') ? window.location.protocol + '//' + window.location.hostname + ':16969/' : '/';
-export const socketIoConfig: SocketIoConfig = { url: SOCKET_IO_URL, options: {} };
+if (PRODUCTION) metaReducers.push(logMetaReducer);
+// TODO ngrx-store-ionic-storage does not seem to be working, it does not hydrate the store state at all
+//metaReducers.push(storageMetaReducer);
 
 @NgModule({
   declarations: [
@@ -61,7 +57,7 @@ export const socketIoConfig: SocketIoConfig = { url: SOCKET_IO_URL, options: {} 
     StoreModule.forRoot(reducers, { metaReducers: metaReducers }),
     // TODO ngrx-store-ionic-storage does not seem to be working, it does not hydrate the store state at all
     EffectsModule.forRoot([HomeEffects, ChannelEffects, ProfileEffects/*, StorageSyncEffects*/]),
-    SocketIoModule.forRoot(socketIoConfig),
+    SocketIoModule.forRoot({ url: SOCKET_IO_URL, options: {} }),
     LinkyModule,
     MomentModule
   ],
