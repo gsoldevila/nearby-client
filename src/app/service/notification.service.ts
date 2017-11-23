@@ -52,8 +52,7 @@ export class NotificationService {
       'badge': '/assets/icon/favicon.ico',
       'icon': '/assets/icon/favicon.ico',
       'tag': 'nearby-message',
-      'body': msg.content,
-      'requireInteraction': true
+      'body': msg.content
     });
   }
 
