@@ -23,6 +23,7 @@ import { ChannelPage } from './channel/channel';
 import { ChannelOptions } from './channel/channel.options';
 
 import { ServerService } from './service/server.service';
+import { NotificationService } from './service/notification.service';
 import { PositionService } from './service/position.service';
 import { ToastService } from './service/toast.service';
 
@@ -74,6 +75,7 @@ if (PRODUCTION) metaReducers.push(logMetaReducer);
     StatusBar,
     SplashScreen,
     ServerService,
+    NotificationService,
     PositionService,
     ToastService,
     { provide: ErrorHandler, useClass: IonicErrorHandler }

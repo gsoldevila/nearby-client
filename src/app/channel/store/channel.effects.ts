@@ -5,6 +5,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/withLatestFrom';
 
 import { ServerService } from '../../service/server.service';
+import { NotificationService } from '../../service/notification.service';
 
 import * as fromApp from '../../store/app.reducers';
 import * as AppActions from '../../store/app.actions';
@@ -14,7 +15,8 @@ import { Channel } from '../../model/channel.model';
 @Injectable()
 export class ChannelEffects {
   constructor(private actions$: Actions,
-    private server: ServerService) { }
+    private server: ServerService,
+    private notificationService: NotificationService) { }
 
   @Effect({ dispatch: false })
   sendCreateChannelRequest = this.actions$
@@ -38,6 +40,15 @@ export class ChannelEffects {
     .ofType(ChannelActions.SEND_MESSAGE)
     .map((action: ChannelActions.SendMessage) => action.payload)
     .do(data => this.server.sendMessage(data.channel, data.message));
+
+  @Effect({ dispatch: false })
+  notifyOnNewMEssage = this.actions$
+    .ofType(ChannelActions.MESSAGE_RECEIVED)
+    .map((action: ChannelActions.MessageReceived) => action.payload)
+    .do(message => {
+      console.log('yeaaah');
+      this.notificationService.notify(message)
+    });
 
   @Effect({ dispatch: false })
   notifyServerWhenLeavingAChannel = this.actions$
