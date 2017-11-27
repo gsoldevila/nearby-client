@@ -50,10 +50,8 @@
       <ion-icon name="people" [color]="channel.online ? 'turquoise' : 'black'" item-start>
       </ion-icon>
       {{ channel.name }}
-      <ng-template *ngIf="channel.position">
-        <ion-note *ngIf="channel.position.distance >= 1000">{{ +channel.position.distance/1000 | number:'1.0-0' }} km from you</ion-note>
-        <ion-note *ngIf="channel.position.distance < 1000">{{ channel.position.distance }} m from you</ion-note>
-      </ng-template>
+      <ion-note *ngIf="channel.position && channel.position.distance >= 1000">{{ +channel.position.distance/1000 | number:'1.0-0' }} km from you</ion-note>
+      <ion-note *ngIf="channel.position && channel.position.distance < 1000">{{ channel.position.distance }} m from you</ion-note>
       <p>Created {{channel.timestamp | amTimeAgo}} by {{channel.creator && channel.creator.alias ? channel.creator.alias : 'someone'}}</p>
       <p *ngIf="channel.messages.length; else noMessages">Last message: {{ channel.messages[channel.messages.length - 1].timestamp | amTimeAgo }}</p>
       <ng-template #noMessages>

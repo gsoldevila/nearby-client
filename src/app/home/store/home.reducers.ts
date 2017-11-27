@@ -25,7 +25,11 @@ export function homeReducer(state = initialState, action: HomeActions.HomeAction
       // merge open channels into nearbyChannels, to preserve unread counters and messages
       let mergedNearby = action.payload.map((ch: Channel) => {
         let previous = state.nearbyChannels.find((ch2: Channel) => ch.name === ch2.name);
-        return previous && previous.online ? previous : ch;
+        if (previous && previous.online) {
+          previous.position = ch.position;
+          return previous;
+        }
+        return ch;
       });
       return {
         ...state,

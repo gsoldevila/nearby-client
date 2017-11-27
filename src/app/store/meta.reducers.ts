@@ -32,7 +32,7 @@ export function simpleLogMetaReducer(reducer: ActionReducer<any, any>): ActionRe
   return function newReducer(state, action) {
     console.log('[NgRxStore action]: ' + action.type);
     const nextState = reducer(state, action);
-    return nextState
+    return nextState;
   }
 }
 

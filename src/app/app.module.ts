@@ -37,7 +37,7 @@ import { logMetaReducer/*, storageMetaReducer*/ } from './store/meta.reducers';
 
 
 const metaReducers = [];
-if (PRODUCTION) metaReducers.push(logMetaReducer);
+if (!PRODUCTION) metaReducers.push(logMetaReducer);
 // TODO ngrx-store-ionic-storage does not seem to be working, it does not hydrate the store state at all
 //metaReducers.push(storageMetaReducer);
 
