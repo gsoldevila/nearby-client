@@ -141,13 +141,7 @@ export class HomePage implements OnInit {
 
   openChannel(item: Channel) {
     this.showSearch = false;
-    this.store.select('channel')
-      .take(1)
-      .map((channelState: fromChannel.State) => channelState.openChannels)
-      .subscribe((channels) => {
-        let open = channels.find(candidate => candidate.name === item.name);
-        if (open) this.store.dispatch(new ChannelActions.GotoChannel(open));
-        else this.store.dispatch(new ChannelActions.TryOpenChannel(item));
-      });
+    if (item.online) this.store.dispatch(new ChannelActions.GotoChannel(item));
+    else this.store.dispatch(new ChannelActions.TryOpenChannel(item));
   }
 }

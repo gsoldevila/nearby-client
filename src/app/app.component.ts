@@ -22,6 +22,7 @@ import { HomePage } from './home/home';
 import { ProfilePage } from './profile/profile';
 import { ChannelPage } from './channel/channel';
 import { Channel } from './model/channel.model';
+import { User } from './model/user.model';
 
 @Component({
   templateUrl: 'app.html'
@@ -29,6 +30,7 @@ import { Channel } from './model/channel.model';
 export class MyApp implements OnInit, OnDestroy {
   @ViewChild(Nav) nav: Nav;
   rootPage: any = WhitePage;
+  user: User;
   openChannels: Channel[];
   private componentDestroyed: Subject<void> = new Subject();
 
@@ -87,7 +89,12 @@ export class MyApp implements OnInit, OnDestroy {
       // observe the store and subscribe to changes in the Model
       this.store.select('channel')
         .takeUntil(this.componentDestroyed)
-        .subscribe(channelState => this.openChannels = channelState.openChannels);
+        .subscribe(channel$ => this.openChannels = channel$.openChannels);
+
+      // observe the profile, to render user data in the Drawer
+      this.store.select('profile')
+        .takeUntil(this.componentDestroyed)
+        .subscribe(profile$ => this.user = profile$.user);
 
       // mobile specific actions
       this.splashScreen.hide();

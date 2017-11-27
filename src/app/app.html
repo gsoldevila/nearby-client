@@ -1,16 +1,10 @@
 <ion-menu [content]="content">
-  <ion-header>
-    <ion-toolbar>
-      <ion-title>My channels</ion-title>
-      <ion-buttons end>
-        <button ion-button icon-only menuClose (click)="navigateProfile()">
-          <ion-icon name="person"></ion-icon>
-        </button>
-      </ion-buttons>
-    </ion-toolbar>
-  </ion-header>
-
   <ion-content>
+    <div class="profile">
+      <ion-icon name="person" menuClose (click)="navigateProfile()"></ion-icon>
+      <div menuClose (click)="navigateProfile()" class="card-title">{{ user?.alias }}</div>
+      <div menuClose (click)="navigateProfile()" class="card-subtitle">{{ user?.firstName }} {{ user?.lastName }}</div>
+    </div>
     <ion-list no-lines>
       <button *ngFor="let channel of openChannels" menuClose ion-item (click)="gotoChannel(channel)">
         <ion-badge *ngIf="channel.unread; else noUnread" color="purple">{{channel.unread}}</ion-badge>
@@ -18,7 +12,7 @@
           <ion-icon name="people" item-start></ion-icon>
         </ng-template>
         {{channel.name}}
-        <ion-icon name="close" item-end (click)="leaveChannel(channel) && event.stopPropagation()"></ion-icon>
+        <ion-icon name="close-circle" item-end (tap)="leaveChannel(channel) && event.stopPropagation()" color="turquoise"></ion-icon>
       </button>
     </ion-list>
   </ion-content>

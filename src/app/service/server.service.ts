@@ -93,7 +93,7 @@ export class ServerService {
         this.socket.emit('joinChannel', createRequest);
       },
       (err) => {
-        const createRequest = { channel: channelName, creator: this.user };
+        const createRequest = { user: this.user, channel: channelName };
         // console.log('[ServerService] creating channel %s', createRequest);
         this.socket.emit('joinChannel', createRequest);
       }

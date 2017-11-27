@@ -9,6 +9,7 @@ export const TRY_OPEN_CHANNEL = 'NEARBY_TRY_OPEN_CHANNEL';
 export const OPEN_CHANNEL = 'NEARBY_OPEN_CHANNEL';
 export const ENTER_CHANNEL_ERROR = 'NEARBY_ENTER_CHANNEL_ERROR';
 export const GOTO_CHANNEL = 'NEARBY_GOTO_CHANNEL';
+export const GET_CHANNEL_INFO = 'NEARBY_GET_CHANNEL_INFO';
 export const SEND_MESSAGE = 'NEARBY_SEND_MESSAGE';
 export const MESSAGE_RECEIVED = 'NEARBY_MESSAGE_RECEIVED';
 export const CONNECTION_LOST = 'NEARBY_CONNECTION_LOST';
@@ -38,6 +39,11 @@ export class EnterChannelError implements Action {
 
 export class GotoChannel implements Action {
   readonly type = GOTO_CHANNEL;
+  constructor(public payload: Channel) { }
+}
+
+export class GetChannelInfo implements Action {
+  readonly type = GET_CHANNEL_INFO;
   constructor(public payload: Channel) { }
 }
 
