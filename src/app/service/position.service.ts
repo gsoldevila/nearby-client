@@ -38,7 +38,7 @@ export class PositionService {
   private displayError(err: PositionError) {
     switch (err.code) {
       case err.PERMISSION_DENIED:
-        return this.displayErrorMessage('Please enable location detection for a better experience');
+        return this.displayErrorMessage('Enable geolocation for a better experience');
       case err.POSITION_UNAVAILABLE:
         return this.displayErrorMessage('Current location is not available');
       case err.TIMEOUT:

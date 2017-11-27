@@ -1,11 +1,11 @@
 <ion-header>
   <ion-navbar>
-    <button ion-button menuToggle (click)="goBack()">
+    <button ion-button menuToggle (tap)="goBack()">
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>#{{ channel?.name }}</ion-title>
     <ion-buttons end>
-      <button ion-button icon-only (click)="channelOptions($event)">
+      <button ion-button icon-only (tap)="channelOptions($event)">
         <ion-icon name="more"></ion-icon>
       </button>
     </ion-buttons>
@@ -34,7 +34,7 @@
     <ion-textarea #userMessage placeholder="Say something" (keyup)="$event.keyCode == 13 && !$event.shiftKey && sendMessage(userMessage)">
     </ion-textarea>
     <ion-buttons end>
-      <button ion-button icon-only color="turquoise" (click)="sendMessage(userMessage)"
+      <button ion-button icon-only color="turquoise" (tap)="sendMessage(userMessage)"
         (mousedown)="$event.preventDefault()">
         <ion-icon name="send"></ion-icon>
       </button>

@@ -5,7 +5,7 @@
     "type": "git",
     "url": "https://github.com/gsoldevila/nearby-client.git"
   },
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "Gerard Soldevila",
   "homepage": "http://ionicframework.com/",
   "private": true,
@@ -43,6 +43,7 @@
     "@ngrx/store": "^4.1.1",
     "angular-linky": "^1.2.2",
     "angular2-moment": "^1.7.0",
+    "cordova-android": "6.4.0",
     "cordova-browser": "5.0.1",
     "cordova-plugin-device": "^1.1.7",
     "cordova-plugin-ionic-webview": "^1.1.16",
@@ -95,7 +96,8 @@
       "cordova-plugin-statusbar": {}
     },
     "platforms": [
-      "browser"
+      "browser",
+      "android"
     ]
   }
 }

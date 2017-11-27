@@ -53,7 +53,7 @@ if (PRODUCTION) metaReducers.push(logMetaReducer);
   imports: [
     BrowserModule,
     ReactiveFormsModule,
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp, { mode: 'md' }),
     IonicStorageModule.forRoot(),
     StoreModule.forRoot(reducers, { metaReducers: metaReducers }),
     // TODO ngrx-store-ionic-storage does not seem to be working, it does not hydrate the store state at all

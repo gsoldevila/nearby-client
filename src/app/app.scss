@@ -15,8 +15,48 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 ion-menu {
-  .content, .list .item {
-    color: white;
-    background-color: color($colors, secondary);
+  [menuClose] {
+    cursor: pointer;
   }
+
+  .profile {
+    color: white;
+    background-image: url(/assets/img/sunset.jpg);
+    background-size: cover;
+    background-position: center;
+    display: grid;
+    grid-template-rows: 5em;
+    grid-template-columns: 30% 70%;
+    padding-bottom: 1em;
+
+    .card-title, .card-subtitle {
+      grid-column: 2 / 3;
+    }
+
+    ion-icon {
+      align-self: center;
+      font-size: 3em;
+      grid-row: 2 / 4;
+      text-align: center;
+      text-shadow: 1px 1px #444;
+    }
+
+    .card-title {
+      font-size: 1.5em;
+      font-weight: bold;
+      grid-row: 2 / 3;
+      text-shadow: 1px 1px #444;
+    }
+
+    .card-subtitle {
+      font-size: 1.0em;
+      width: 100%;
+      color: lightgray;
+      grid-row: 3 / 4;
+    }
+  }
+}
+
+.scroll-content {
+  overflow-y: auto;
 }

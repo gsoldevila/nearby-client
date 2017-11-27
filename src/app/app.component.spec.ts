@@ -18,9 +18,11 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { ServerService } from './service/server.service';
 import { ToastService } from './service/toast.service';
 import { PositionService } from './service/position.service';
+import { NotificationService } from './service/notification.service';
 import { PlatformMock, StatusBarMock, SplashScreenMock } from '../../test-config/ionic.mocks';
 import { ServerServiceMock } from './service/mock/server.service.mock';
 import { PositionServiceMock } from './service/mock/position.service.mock';
+import { NotificationServiceMock } from './service/mock/notification.service.mock';
 import { ToastServiceMock } from './service/mock/toast.service.mock';
 
 import { reducers } from './store/app.reducers';
@@ -57,6 +59,7 @@ describe('Nearby component', () => {
         { provide: ServerService, useClass: ServerServiceMock },
         { provide: PositionService, useClass: PositionServiceMock },
         { provide: ToastService, useClass: ToastServiceMock },
+        { provide: NotificationService, useClass: NotificationServiceMock },
         { provide: StatusBar, useClass: StatusBarMock },
         { provide: SplashScreen, useClass: SplashScreenMock },
         { provide: Platform, useClass: PlatformMock }

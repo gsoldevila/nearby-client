@@ -22,9 +22,14 @@ export function homeReducer(state = initialState, action: HomeActions.HomeAction
         refresher: action.refresher
       };
     case HomeActions.SEARCH_SUCCESS:
+      // merge open channels into nearbyChannels, to preserve unread counters and messages
+      let mergedNearby = action.payload.map((ch: Channel) => {
+        let previous = state.nearbyChannels.find((ch2: Channel) => ch.name === ch2.name);
+        return previous && previous.online ? previous : ch;
+      });
       return {
         ...state,
-        nearbyChannels: action.payload
+        nearbyChannels: mergedNearby
       };
     case ChannelActions.OPEN_CHANNEL:
       // the user has created / opened a channel => update it on the nearby list

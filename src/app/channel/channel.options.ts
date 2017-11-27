@@ -8,8 +8,8 @@ import * as ChannelActions from './store/channel.actions';
 @Component({
   template: `
     <ion-list no-lines>
-      <button ion-item (click)="currentChannelInfo()">Channel info</button>
-      <button ion-item (click)="currentChannelLeave()">Leave channel</button>
+      <button ion-item (tap)="currentChannelInfo()">Channel info</button>
+      <button ion-item (tap)="currentChannelLeave()">Leave channel</button>
     </ion-list>
   `,
   styles: ['.list-md { margin-bottom: 0 }']
